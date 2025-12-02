@@ -1,0 +1,23 @@
+{
+  "name": "video-meet-platform",
+  "version": "1.0.0",
+  "description": "Video meeting platform - Zoom/Meet alternative",
+  "scripts": {
+    "dev:server": "cd server && npm run dev",
+    "dev:client": "cd stream && npm run dev",
+    "install:all": "cd server && npm install && cd ../stream && npm install",
+    "start:server": "cd server && npm start"
+  },
+  "keywords": [
+    "video",
+    "meeting",
+    "webrtc",
+    "zoom"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "firebase": "^12.6.0",
+    "zego-express-engine-webrtc": "^3.11.0"
+  }
+}
