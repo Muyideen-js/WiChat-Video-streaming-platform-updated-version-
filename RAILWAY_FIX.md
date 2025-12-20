@@ -1,31 +1,48 @@
 # Fix Railway Build Error
 
 ## Problem
-You're seeing: "Error creating build plan with Railpack"
+You're seeing: "No start command was found" or "Error creating build plan with Railpack"
 
 ## Solution
 
-### Step 1: Set Root Directory in Railway
+### Step 1: Set Root Directory in Railway (CRITICAL)
 
 1. **Go to your Railway project dashboard**
 2. **Click on your service** (the one that's failing)
 3. **Go to the "Settings" tab**
 4. **Scroll down to "Root Directory"**
-5. **Enter:** `server`
+5. **Enter:** `server` (exactly this, no trailing slash)
 6. **Click "Save"**
 
-### Step 2: Verify Configuration
+### Step 2: Verify Files Are Created
 
-Make sure Railway can see:
-- ✅ `server/package.json` exists
-- ✅ `server/server.js` exists
-- ✅ Root directory is set to `server`
+I've created these files for you:
+- ✅ `server/index.js` - Fallback entry point
+- ✅ `server/nixpacks.toml` - Explicit start command configuration
+- ✅ `server/railway.json` - Railway configuration
 
-### Step 3: Redeploy
+### Step 3: Commit and Push Changes
 
-1. **Go to "Deployments" tab**
-2. **Click "Redeploy"** or push a new commit
-3. **Watch the build logs**
+If you haven't already, commit the new files:
+```bash
+git add server/index.js server/nixpacks.toml server/railway.json
+git commit -m "Add Railway deployment configuration"
+git push
+```
+
+### Step 4: Redeploy
+
+1. **Go to Railway dashboard → "Deployments" tab**
+2. **Click "Redeploy"** (or Railway will auto-deploy after git push)
+3. **Watch the build logs** - it should now find the start command
+
+### Step 5: Verify Build
+
+The build should now show:
+- ✅ Detected Node
+- ✅ Using npm package manager
+- ✅ Running: `npm install`
+- ✅ Starting: `node server.js`
 
 ### Alternative: Deploy Server Folder Only
 
