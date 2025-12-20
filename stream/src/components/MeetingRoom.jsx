@@ -4,9 +4,8 @@ import { v4 as uuidv4 } from 'uuid';
 import VideoGrid from './VideoGrid';
 import Controls from './Controls';
 import Chat from './Chat';
+import { SOCKET_URL } from '../config/apiConfig';
 import './MeetingRoom.css';
-
-const SOCKET_URL = 'http://localhost:3001';
 
 function MeetingRoom({ meetingId, userName, onLeave }) {
   const [socket, setSocket] = useState(null);

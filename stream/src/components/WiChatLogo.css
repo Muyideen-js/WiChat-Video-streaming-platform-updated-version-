@@ -1,33 +1,61 @@
 .wichat-logo {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 10px;
-  margin-bottom: 8px;
 }
 
 .logo-icon {
   flex-shrink: 0;
-  width: 28px;
-  height: 28px;
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 999px;
+  background: radial-gradient(circle at 30% 0, rgba(255, 255, 255, 0.9), transparent 55%),
+    linear-gradient(135deg, #4f46e5, #2563eb);
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.25);
+  position: relative;
+  overflow: hidden;
+}
+
+.logo-icon::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 1px solid rgba(191, 219, 254, 0.6);
+  pointer-events: none;
 }
 
 .logo-icon svg {
-  width: 100%;
-  height: 100%;
+  width: 80%;
+  height: 80%;
+}
+
+.logo-text-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
 }
 
 .logo-text {
   font-family: 'Poppins', sans-serif;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: 700;
-  color: #2563eb;
-  letter-spacing: -0.3px;
-  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  letter-spacing: -0.04em;
+  background: linear-gradient(120deg, #0f172a, #1e293b, #2563eb);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+.logo-tagline {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #94a3b8;
 }

@@ -350,6 +350,14 @@ function LandingPage() {
     }
   ];
 
+  const navLinks = [
+    { label: 'Features', href: '#features' },
+    { label: 'Workflow', href: '#workflow' },
+    { label: 'Security', href: '#security' },
+    { label: 'Pricing', href: '#pricing' },
+    { label: 'FAQ', href: '#faq' },
+  ];
+
   return (
     <div className="landing-page">
       {/* Navigation */}
@@ -360,8 +368,21 @@ function LandingPage() {
         transition={{ duration: 0.6 }}
       >
         <div className="nav-container">
-          <WiChatLogo />
+          <div className="nav-left">
+            <WiChatLogo />
+            <span className="nav-pill">v2.1 Beta</span>
+          </div>
+          <div className="nav-links">
+            {navLinks.map((link) => (
+              <a key={link.href} href={link.href}>
+                {link.label}
+              </a>
+            ))}
+          </div>
           <div className="nav-right">
+            <button className="nav-ghost-btn" onClick={() => window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })}>
+              <span>Docs</span>
+            </button>
             <motion.button
               className="nav-btn"
               onClick={handleStartMeeting}
@@ -480,7 +501,7 @@ function LandingPage() {
       </section>
 
       {/* Features Section */}
-      <section className="features-section">
+      <section id="features" className="features-section">
         <div className="section-container">
           <motion.h2
             className="section-title"
@@ -558,7 +579,7 @@ function LandingPage() {
       </section>
 
       {/* How It Works Section */}
-      <section className="how-it-works-section">
+      <section id="workflow" className="how-it-works-section">
         <div className="section-container">
           <motion.h2
             className="section-title"
@@ -670,7 +691,7 @@ function LandingPage() {
       </section>
 
       {/* Pricing Section */}
-      <section className="pricing-section">
+      <section id="pricing" className="pricing-section">
         <div className="section-container">
           <motion.h2
             className="section-title"
@@ -781,7 +802,7 @@ function LandingPage() {
       </section>
 
       {/* Security Section */}
-      <section className="security-section">
+      <section id="security" className="security-section">
         <div className="section-container">
           <div className="security-content">
             <motion.div
@@ -832,7 +853,7 @@ function LandingPage() {
       </section>
 
       {/* FAQ Section */}
-      <section className="faq-section">
+      <section id="faq" className="faq-section">
         <div className="section-container">
           <motion.h2
             className="section-title"

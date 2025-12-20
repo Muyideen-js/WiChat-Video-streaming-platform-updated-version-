@@ -6,6 +6,14 @@ function MeetingRoomOverlay({ callId, onClose }) {
   const [copied, setCopied] = useState(false);
 
   const meetingUrl = `${window.location.origin}/meeting/${callId}`;
+  const hostName = localStorage.getItem('wiChatUserName') || 'Host';
+  const createdAt = new Date().toLocaleString(undefined, {
+    day: '2-digit',
+    month: 'short',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+  });
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(meetingUrl);
@@ -88,6 +96,28 @@ function MeetingRoomOverlay({ callId, onClose }) {
                   <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
                 </svg>
               </button>
+            </div>
+
+            <div className="smart-preview">
+              <p className="smart-preview-label">Smart link preview</p>
+              <div className="smart-preview-card">
+                <div className="smart-preview-main">
+                  <h4 className="smart-preview-title">Wi-Chat instant room</h4>
+                  <p className="smart-preview-subtitle">Secure video meeting powered by Wi-Chat</p>
+                </div>
+                <div className="smart-preview-meta">
+                  <div className="smart-preview-host">
+                    <div className="smart-preview-avatar">
+                      {hostName.charAt(0).toUpperCase()}
+                    </div>
+                    <div className="smart-preview-host-text">
+                      <span className="host-name">Host: {hostName}</span>
+                      <span className="host-time">Created {createdAt}</span>
+                    </div>
+                  </div>
+                  <p className="smart-preview-note">Anyone with this link can request to join.</p>
+                </div>
+              </div>
             </div>
           </div>
         </motion.div>

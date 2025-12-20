@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import WiChatLogo from './WiChatLogo';
 import AdsSection from './AdsSection';
+import { apiEndpoints } from '../config/apiConfig';
 import './Home.css';
 
 function Home() {
@@ -29,7 +30,7 @@ function Home() {
     setError('');
     try {
       // Create meeting
-      const response = await fetch('http://localhost:3001/api/meeting/create', {
+      const response = await fetch(apiEndpoints.createMeeting(), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -66,7 +67,7 @@ function Home() {
     setIsJoining(true);
     setError('');
     try {
-      const response = await fetch(`http://localhost:3001/api/meeting/${meetingId}`);
+      const response = await fetch(apiEndpoints.checkMeeting(meetingId));
       const data = await response.json();
       
       if (data.exists) {
@@ -168,6 +169,7 @@ function Home() {
               onChange={(e) => setUserName(e.target.value)}
               onKeyPress={handleKeyPress}
               autoFocus
+              spellCheck="false"
             />
           </div>
 
@@ -184,6 +186,7 @@ function Home() {
                   setError('');
                 }}
                 onKeyPress={handleKeyPress}
+                spellCheck="false"
               />
             </div>
           )}

@@ -1,9 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { ZegoUIKitPrebuilt } from '@zegocloud/zego-uikit-prebuilt';
 import MeetingRoomOverlay from './MeetingRoomOverlay';
 import ScreenAnnotation from './ScreenAnnotation';
-import AIChat from './AIChat';
 import './ZegoMeetingRoom.css';
 
 function ZegoMeetingRoom({ callId, userName, userId, appID, serverSecret, onLeave }) {
@@ -11,8 +9,6 @@ function ZegoMeetingRoom({ callId, userName, userId, appID, serverSecret, onLeav
   const zegoKitInstanceRef = useRef(null);
   const [showShareModal, setShowShareModal] = useState(false);
   const [showAnnotation, setShowAnnotation] = useState(false);
-  const [showAIChat, setShowAIChat] = useState(false);
-  const [isAdmin, setIsAdmin] = useState(false); // First user is admin
 
   useEffect(() => {
     if (!appID || !serverSecret || !callId || !userId) {
@@ -49,13 +45,6 @@ function ZegoMeetingRoom({ callId, userName, userId, appID, serverSecret, onLeav
 
         zegoKitRef.current = zegoKit;
         zegoKitInstanceRef.current = zegoKit;
-
-        // Check if user is admin (first user in room)
-        // In a real app, you'd check this from the server
-        const existingUsers = zegoKit.getAllUsers ? zegoKit.getAllUsers() : [];
-        if (existingUsers.length === 0) {
-          setIsAdmin(true);
-        }
 
         // Wait for container to be ready
         const container = document.getElementById('zego-meeting-container');
@@ -163,38 +152,6 @@ function ZegoMeetingRoom({ callId, userName, userId, appID, serverSecret, onLeav
         </button>
       </div>
 
-      {/* Left side - AI Chat Peek */}
-      <div className="ai-chat-peek-container">
-        <motion.button
-          className={`ai-chat-peek-btn ${showAIChat ? 'active' : ''}`}
-          onClick={() => setShowAIChat(!showAIChat)}
-          title="AI Assistant"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          <div className="ai-icon-wrapper">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
-              <path d="M2 17l10 5 10-5"></path>
-              <path d="M2 12l10 5 10-5"></path>
-            </svg>
-          </div>
-          {!showAIChat && (
-            <>
-              <div className="ai-message-bubble" style={{ animationDelay: '0s' }}>
-                Hey! I'm here 👋
-              </div>
-              <div className="ai-message-bubble" style={{ animationDelay: '1.33s' }}>
-                I can help you! ✨
-              </div>
-              <div className="ai-message-bubble" style={{ animationDelay: '2.66s' }}>
-                Try me out 🚀
-              </div>
-            </>
-          )}
-        </motion.button>
-      </div>
-
       {/* Share Meeting Modal */}
       {showShareModal && (
         <MeetingRoomOverlay
@@ -209,17 +166,6 @@ function ZegoMeetingRoom({ callId, userName, userId, appID, serverSecret, onLeav
         onClose={() => setShowAnnotation(false)}
         zegoKit={zegoKitInstanceRef.current}
         callId={callId}
-      />
-
-      {/* AI Chat Panel */}
-      <AIChat
-        isOpen={showAIChat}
-        onClose={() => setShowAIChat(false)}
-        zegoKit={zegoKitInstanceRef.current}
-        callId={callId}
-        userId={userId}
-        userName={userName}
-        isAdmin={isAdmin}
       />
     </div>
   );

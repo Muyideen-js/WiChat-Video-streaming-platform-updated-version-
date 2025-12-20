@@ -5,6 +5,8 @@ import LandingPage from './components/LandingPage';
 import Home from './components/Home';
 import ZegoCallWrapper from './components/ZegoCallWrapper';
 import WiChatLogo from './components/WiChatLogo';
+import BackToTop from './components/BackToTop';
+import { apiEndpoints } from './config/apiConfig';
 import './App.css';
 
 function MeetingRoute() {
@@ -29,7 +31,7 @@ function MeetingRoute() {
   useEffect(() => {
     // Check if room exists
     if (roomId) {
-      fetch(`http://localhost:3001/api/meeting/${roomId}`)
+      fetch(apiEndpoints.checkMeeting(roomId))
         .then(res => res.json())
         .then(data => {
           setRoomExists(data.exists);
@@ -234,6 +236,7 @@ function App() {
             element={<LandingPage />} 
           />
         </Routes>
+        <BackToTop />
       </div>
     </BrowserRouter>
   );
