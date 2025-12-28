@@ -11,8 +11,8 @@
 // ZEGO_APP_ID=your_app_id_here
 //
 // Option 2: Replace directly below (for quick testing)
-const ZEGO_SERVER_SECRET = process.env.ZEGO_SERVER_SECRET || 'YOUR_SERVER_SECRET';
-const ZEGO_APP_ID = process.env.ZEGO_APP_ID || 'YOUR_APP_ID';
+const ZEGO_SERVER_SECRET = process.env.ZEGO_SERVER_SECRET || '67805661a89243fdf1fa5d843c5d8615';
+const ZEGO_APP_ID = process.env.ZEGO_APP_ID || '939518804';
 
 /**
  * Generate a ZEGOCLOUD token (server-side)
